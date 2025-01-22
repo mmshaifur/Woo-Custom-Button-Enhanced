@@ -7,8 +7,13 @@ function wcbe_register_settings() {
     register_setting('wcbe_settings_group', 'wcbe_customize_text');
     register_setting('wcbe_settings_group', 'wcbe_button_pages');
     register_setting('wcbe_settings_group', 'wcbe_button_text_style');
-    register_setting('wcbe_settings_group', 'wcbe_show_order_now'); // Show/Hide Order Now
-    register_setting('wcbe_settings_group', 'wcbe_show_customize'); // Show/Hide Customize
+    register_setting('wcbe_settings_group', 'wcbe_order_now_color');
+    register_setting('wcbe_settings_group', 'wcbe_customize_color');
+    register_setting('wcbe_settings_group', 'wcbe_order_now_hover_color');
+    register_setting('wcbe_settings_group', 'wcbe_customize_hover_color');
+    register_setting('wcbe_settings_group', 'wcbe_button_text_size');
+    register_setting('wcbe_settings_group', 'wcbe_button_border');
+    register_setting('wcbe_settings_group', 'wcbe_button_border_radius');
 }
 
 // Add settings page
@@ -36,38 +41,47 @@ function wcbe_render_settings_page() {
             do_settings_sections('wcbe_settings_group');
             ?>
             <table class="form-table">
+                <!-- Button Text -->
                 <tr>
-                    <th>Order Now Text</th>
+                    <th>Order Now Button Text</th>
                     <td><input type="text" name="wcbe_order_now_text" value="<?php echo esc_attr(get_option('wcbe_order_now_text', 'Order Now')); ?>"></td>
                 </tr>
                 <tr>
-                    <th>Customize Text</th>
+                    <th>Customize Button Text</th>
                     <td><input type="text" name="wcbe_customize_text" value="<?php echo esc_attr(get_option('wcbe_customize_text', 'Customize')); ?>"></td>
                 </tr>
+                <!-- Color Settings -->
                 <tr>
-                    <th>Display Buttons On</th>
-                    <td>
-                        <select name="wcbe_button_pages">
-                            <option value="shop" <?php selected(get_option('wcbe_button_pages'), 'shop'); ?>>Shop Page</option>
-                            <option value="single" <?php selected(get_option('wcbe_button_pages'), 'single'); ?>>Single Product Page</option>
-                            <option value="both" <?php selected(get_option('wcbe_button_pages'), 'both'); ?>>Both</option>
-                        </select>
-                    </td>
+                    <th>Order Now Button Color</th>
+                    <td><input type="color" name="wcbe_order_now_color" value="<?php echo esc_attr(get_option('wcbe_order_now_color', '#f05454')); ?>"></td>
                 </tr>
                 <tr>
-                    <th>Show "Order Now" Button</th>
-                    <td>
-                        <input type="radio" name="wcbe_show_order_now" value="yes" <?php checked(get_option('wcbe_show_order_now', 'yes'), 'yes'); ?>> Yes<br>
-                        <input type="radio" name="wcbe_show_order_now" value="no" <?php checked(get_option('wcbe_show_order_now', 'yes'), 'no'); ?>> No
-                    </td>
+                    <th>Customize Button Color</th>
+                    <td><input type="color" name="wcbe_customize_color" value="<?php echo esc_attr(get_option('wcbe_customize_color', '#0073aa')); ?>"></td>
                 </tr>
                 <tr>
-                    <th>Show "Customize" Button</th>
-                    <td>
-                        <input type="radio" name="wcbe_show_customize" value="yes" <?php checked(get_option('wcbe_show_customize', 'yes'), 'yes'); ?>> Yes<br>
-                        <input type="radio" name="wcbe_show_customize" value="no" <?php checked(get_option('wcbe_show_customize', 'yes'), 'no'); ?>> No
-                    </td>
+                    <th>Order Now Hover Color</th>
+                    <td><input type="color" name="wcbe_order_now_hover_color" value="<?php echo esc_attr(get_option('wcbe_order_now_hover_color', '#c04545')); ?>"></td>
                 </tr>
+                <tr>
+                    <th>Customize Hover Color</th>
+                    <td><input type="color" name="wcbe_customize_hover_color" value="<?php echo esc_attr(get_option('wcbe_customize_hover_color', '#005a87')); ?>"></td>
+                </tr>
+                <!-- Text Size -->
+                <tr>
+                    <th>Button Text Size (px)</th>
+                    <td><input type="number" name="wcbe_button_text_size" value="<?php echo esc_attr(get_option('wcbe_button_text_size', '16')); ?>" min="10" max="30"></td>
+                </tr>
+                <!-- Border Settings -->
+                <tr>
+                    <th>Button Border (e.g., 2px solid #000)</th>
+                    <td><input type="text" name="wcbe_button_border" value="<?php echo esc_attr(get_option('wcbe_button_border', '2px solid #000')); ?>"></td>
+                </tr>
+                <tr>
+                    <th>Button Border Radius (px)</th>
+                    <td><input type="number" name="wcbe_button_border_radius" value="<?php echo esc_attr(get_option('wcbe_button_border_radius', '5')); ?>" min="0" max="50"></td>
+                </tr>
+                <!-- Text Style -->
                 <tr>
                     <th>Text Style</th>
                     <td>

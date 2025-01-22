@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Woo Custom Buttons Enhanced
  * Description: Adds customizable "Order Now" and "Customize" buttons to WooCommerce product pages with advanced styling options.
- * Version: 2.4.0
+ * Version: 2.5.0
  * Author: Shaifur Rahman
  * Author URI: https://shaifur.com/dev/woo-custom-buttons-enhanced
  */
