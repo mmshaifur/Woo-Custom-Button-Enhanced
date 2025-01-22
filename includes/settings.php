@@ -14,6 +14,8 @@ function wcbe_register_settings() {
     register_setting('wcbe_settings_group', 'wcbe_button_text_size');
     register_setting('wcbe_settings_group', 'wcbe_button_border');
     register_setting('wcbe_settings_group', 'wcbe_button_border_radius');
+    register_setting('wcbe_settings_group', 'wcbe_custom_css'); // Custom CSS field
+    register_setting('wcbe_settings_group', 'wcbe_predefined_style'); // Predefined styles
 }
 
 // Add settings page
@@ -59,14 +61,6 @@ function wcbe_render_settings_page() {
                     <th>Customize Button Color</th>
                     <td><input type="color" name="wcbe_customize_color" value="<?php echo esc_attr(get_option('wcbe_customize_color', '#0073aa')); ?>"></td>
                 </tr>
-                <tr>
-                    <th>Order Now Hover Color</th>
-                    <td><input type="color" name="wcbe_order_now_hover_color" value="<?php echo esc_attr(get_option('wcbe_order_now_hover_color', '#c04545')); ?>"></td>
-                </tr>
-                <tr>
-                    <th>Customize Hover Color</th>
-                    <td><input type="color" name="wcbe_customize_hover_color" value="<?php echo esc_attr(get_option('wcbe_customize_hover_color', '#005a87')); ?>"></td>
-                </tr>
                 <!-- Text Size -->
                 <tr>
                     <th>Button Text Size (px)</th>
@@ -81,13 +75,23 @@ function wcbe_render_settings_page() {
                     <th>Button Border Radius (px)</th>
                     <td><input type="number" name="wcbe_button_border_radius" value="<?php echo esc_attr(get_option('wcbe_button_border_radius', '5')); ?>" min="0" max="50"></td>
                 </tr>
-                <!-- Text Style -->
+                <!-- Predefined Styles -->
+<tr>
+    <th>Predefined Button Style</th>
+    <td>
+        <select name="wcbe_predefined_style">
+            <option value="default" <?php selected(get_option('wcbe_predefined_style', 'default'), 'default'); ?>>Default</option>
+            <option value="centered" <?php selected(get_option('wcbe_predefined_style', 'centered'), 'centered'); ?>>Centered</option>
+            <option value="inline" <?php selected(get_option('wcbe_predefined_style', 'inline'), 'inline'); ?>>Inline</option>
+            <option value="spaced" <?php selected(get_option('wcbe_predefined_style', 'spaced'), 'spaced'); ?>>Spaced Buttons</option>
+        </select>
+    </td>
+</tr>
+
+                <!-- Custom CSS -->
                 <tr>
-                    <th>Text Style</th>
-                    <td>
-                        <input type="checkbox" name="wcbe_button_text_style[]" value="bold" <?php echo in_array('bold', (array) get_option('wcbe_button_text_style', [])) ? 'checked' : ''; ?>> Bold<br>
-                        <input type="checkbox" name="wcbe_button_text_style[]" value="italic" <?php echo in_array('italic', (array) get_option('wcbe_button_text_style', [])) ? 'checked' : ''; ?>> Italic
-                    </td>
+                    <th>Custom CSS</th>
+                    <td><textarea name="wcbe_custom_css" rows="5" cols="50"><?php echo esc_textarea(get_option('wcbe_custom_css', '')); ?></textarea></td>
                 </tr>
             </table>
             <?php submit_button(); ?>
