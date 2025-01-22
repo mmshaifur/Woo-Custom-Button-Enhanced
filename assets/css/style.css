@@ -1,0 +1,11 @@
+.wcbe-buttons-container {
+    display: flex;
+    gap: 10px;
+}
+
+.wcbe-buttons-container a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #ffffff;
+}
